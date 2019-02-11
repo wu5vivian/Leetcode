@@ -12,4 +12,41 @@
 **Tips** : 
 1. 注意遍历所有substring中心的时候，Index < s.lenght() - 1， 因为你会考虑以 （index, index + 1）为中心的情况。不减1会出现OutofBound 的情况。
 
-
+```java
+class Solution {
+    public String longestPalindrome(String s) {
+        if(s == null){
+            return "";
+        }
+        if(s.length() == 0 || s.length() == 1){
+            return s;
+        }
+        String max_substring = "";
+        for(int i = 0; i < s.length() - 1; i++){
+            String cur1 = getLongest(s, i, i);
+            String cur2 = getLongest(s, i, i + 1);
+            if(cur1.length() > max_substring.length()){
+                max_substring = cur1;
+            }
+            
+            if(cur2.length() > max_substring.length()){
+                max_substring = cur2;
+            }
+        }
+        return max_substring;        
+    }
+    
+    public String getLongest(String s, int i, int j){        
+        while(i >= 0 && j < s.length()){
+            if(s.charAt(i) != s.charAt(j)){
+                break;
+            }
+            i--;
+            j++;
+        }
+//        String result = j == s.length()? s.substring(i+1, j+1): s.substring(i + 1, j);
+        return s.substring(i + 1, j);
+    }
+    
+}
+```
