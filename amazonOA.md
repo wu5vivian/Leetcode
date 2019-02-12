@@ -102,5 +102,5 @@ class Solution {
 
 **Tips** from this questions:
 1. ```java  str.toLowerCase() / str.toUpperCase() ```
-2. regrex: "[^a-zA-z]" / "\\W+": all non-word character. Attention: "+" used for representing "more"
-3. regrex: "\\s+"： all white-space. Also need attention: use "+" here.
+2. regrex: "[^a-zA-Z]" / "\\W+": all non-word character. Attention: "+" used for representing "more"
+3. regrex: "\\s+"： all white-space. Also need attention: need "+" here.
