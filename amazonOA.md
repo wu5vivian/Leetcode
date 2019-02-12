@@ -284,3 +284,21 @@ public class Solution{
 
 }
 ```
+
+## 6. K Minimum Distance
+
+In a two dimensional lot, there is trenchs and obstacle. Robots needs to begin from top-left corner of the lot, could go left, right, up and down. The goal is to get the obstacle in minimum distance and at the same time the robit needs to avoid trenchs.
+
+Assumptions:
+* flat areas are represented as 1, areas with trenches are represented by 0 and obstacle is represented by 9.
+
+
+BFS
+```java
+public class Solution{
+	public int MinimumDistance(int[][] lot){
+		
+	}
+
+}
+```
