@@ -1,5 +1,14 @@
 # Amazon OA
 
+**Pakages**
+```java
+?? import java.util.*
+import java.util.Comparator;
+import java.util.Map;
+import java.util.Set;
+import java.util.TreeMap;
+```
+
 ## 1. Order Dependency. (Similar to leetcode 210)
  [Course Schedule](https://leetcode.com/problems/course-schedule-ii/)
 
@@ -52,7 +61,8 @@ class Solution {
 ```
 
 
-## 3. Most Frequent Used Words   [819. Most Common Word](https://leetcode.com/problems/most-common-word/)
+## 3. Most Frequent Used Words  
+[819. Most Common Word](https://leetcode.com/problems/most-common-word/)
 
 找出句子中出现频率最高的单词。这题首先向句子中的单独的单词Parse出来，然后用hashmap存储出现的频率，得到最高的。
 第一个注意点： 用正则表达式Parse出单个的单词。
@@ -109,3 +119,32 @@ class Solution {
 ## 4. Count number of substrings with exactly K characters
 similar to [340. Longest Substring with At Most K Distinct Characters](https://leetcode.com/problems/longest-substring-with-at-most-k-distinct-characters/)
 and could refer to (https://www.geeksforgeeks.org/count-number-of-substrings-with-exactly-k-distinct-characters/)
+
+*Brute Force*  Get all possible subtrings from the string and them count the distinct characters in the substring, count all valid substrings. Most brute force ways will need O(n * n * n), which for every substring it will go through all the elements. This will cause duplicates. When the start of substring is fixed, using a hashmap / set to store current distinct characters when the substring's end is moving. This way will get a O(n * n) solution.
+```java
+import java.utils.Arrays;
+import java.utils.Set;
+public class CountKSubstr{
+	int countKDist(String str, int k){
+		if(str == null || str.length() < k){
+			return 0;
+		}
+		int count = 0;
+		for(int i = 0; i <= str.length() - k; i++){
+			Set<Character> set = new HashSet<>();
+	
+			for(int j = i; j < str.length(); j++){
+				set.add(str.charAt(j));
+				if(set.size() == k){
+					count++;
+					break;
+				}
+			}
+		}
+
+	}
+	return count;
+
+}
+```
+* Need to consider lower time complexity.
