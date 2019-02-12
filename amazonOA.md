@@ -50,3 +50,57 @@ class Solution {
     
 }
 ```
+
+
+3. Most Frequent Used Words   [819. Most Common Word](https://leetcode.com/problems/most-common-word/)
+
+找出句子中出现频率最高的单词。这题首先向句子中的单独的单词Parse出来，然后用hashmap存储出现的频率，得到最高的。
+第一个注意点： 用正则表达式Parse出单个的单词。
+第二个注意点： 每次更新hashmap的count的时候就与max比较，同时更新最大值。
+```java
+class Solution {
+    public String mostCommonWord(String paragraph, String[] banned) {
+        if(paragraph == null || paragraph.length() == 0){
+            return "";
+        }
+        String[] words = paragraph.replaceAll("[^a-zA-Z]"," ").toLowerCase().split("\\s+");  
+        Set<String> ban = new HashSet<>();
+        HashMap<String, Integer> count = new HashMap<>();
+        int max = 0;
+        String max_string = "";
+        
+        for(String b : banned){
+            ban.add(b.toLowerCase());
+        }
+        
+        for(String w : words){
+            if(ban.contains(w)){
+                continue;
+            }            
+            if(count.containsKey(w)){
+                int cur = count.get(w);
+                count.put(w, cur + 1);
+                if(cur + 1 > max){
+                    max = cur + 1;
+                    max_string = w;
+                }
+                
+            }else{
+                count.put(w, 1);
+                if(max <= 1){
+                    max = 1;
+                    max_string = w;
+                }
+            }
+                        
+        }
+        return max_string;        
+    }
+}
+```
+[正则表达式资料链接]（http://www.vogella.com/tutorials/JavaRegularExpressions/article.html）
+
+**Tips** from this questions:
+1. ```java  str.toLowerCase() / str.toUpperCase() ```
+2. regrex: "[^a-zA-z]" / "\\W+": all non-word character. Attention: "+" used for representing "more"
+3. regrex: "\\s+"： all white-space. Also need attention: use "+" here.
