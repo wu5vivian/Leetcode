@@ -227,10 +227,60 @@ public void dfsHelper(int[][] matrix, int min, int i, int j ){
 	}
 }
 ```
-__There is a DP version__
+__There is a DP version for this question__
 
 ## 5. Substree: Maximum average node
 
 Given a binary tree, find the subtree with maximum average, return the root of the subtree.
 
-Variations: not binary tree or the average doesn't include the root of the subtree
+Variations: not binary tree or the average doesn't include the root of the subtree.
+```java
+/**
+	Definition of Treenode:
+	public class TreeNode{
+		public int val;
+		public TreeNode left, right;
+		public TreeNode(int val){
+			this.val = val;
+			this.left = this.right = null;
+		}
+	}
+**/ 
+public class Solution{
+	public class ResultType{
+		public int sum;
+		public int node_num;
+		public ResultType(int s, int n){
+			this.sum = s;
+			this.node_num = n;
+		}
+
+	}
+	public TreeNode res = new TreeNode(0);
+	public double max = Double.MIN_VALUE;
+	public TreeNode findMaximum(TreeNode root){
+		helper(root);
+		return res;
+	}
+
+	public ResultType helper(TreeNode root){
+		if(root == null){
+			return new ResultType(0,0);
+		}
+
+		ResultType leftresult = helper(root.left);
+		ResultType rightresult = helper(root.right);
+
+		int totalsum = leftresult.sum + rightresult.sum + root.val;
+		int totalnode = leftresult.node_num + rightresult.node_num + 1;
+
+		if(max < totalsum / totalnode){
+			max = totalsum / totalnode;
+			res = root;
+		}
+		return new ResultType(totalsum, totalnode);
+
+	}
+
+}
+```
