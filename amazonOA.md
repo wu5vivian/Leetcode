@@ -120,7 +120,7 @@ class Solution {
 similar to [340. Longest Substring with At Most K Distinct Characters](https://leetcode.com/problems/longest-substring-with-at-most-k-distinct-characters/)
 and could refer to (https://www.geeksforgeeks.org/count-number-of-substrings-with-exactly-k-distinct-characters/)
 
-*Brute Force*  Get all possible subtrings from the string and them count the distinct characters in the substring, count all valid substrings. Most brute force ways will need O(n * n * n), which for every substring it will go through all the elements. This will cause duplicates. When the start of substring is fixed, using a hashmap / set to store current distinct characters when the substring's end is moving. This way will get a O(n * n) solution.
+**Brute Force**  Get all possible subtrings from the string and them count the distinct characters in the substring, count all valid substrings. Most brute force ways will need O(n * n * n), which for every substring it will go through all the elements. This will cause duplicates. When the start of substring is fixed, using a hashmap / set to store current distinct characters when the substring's end is moving. This way will get a O(n * n) solution.
 ```java
 import java.utils.Arrays;
 import java.utils.Set;
