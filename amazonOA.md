@@ -1,9 +1,9 @@
 # Amazon OA
 
-##1. Order Dependency. (Similar to leetcode 210)
+## 1. Order Dependency. (Similar to leetcode 210)
  [Course Schedule](https://leetcode.com/problems/course-schedule-ii/)
 
-##2. Longest Palindromic Substring
+## 2. Longest Palindromic Substring
 [5. longest Palindromic substring](https://leetcode.com/problems/longest-palindromic-substring/)
 
 **思路**：找到中心点从两边延伸来判断是不是palindromic。对于原string,每一个字符可以作为一个可能的palindromic的中心（substring长度为奇数的情况），或者它与他邻接的字符一起作为中心（substring长度为偶数的情况）。遍历所有可能的中心，找出最长的palindromic。
@@ -52,7 +52,7 @@ class Solution {
 ```
 
 
-##3. Most Frequent Used Words   [819. Most Common Word](https://leetcode.com/problems/most-common-word/)
+## 3. Most Frequent Used Words   [819. Most Common Word](https://leetcode.com/problems/most-common-word/)
 
 找出句子中出现频率最高的单词。这题首先向句子中的单独的单词Parse出来，然后用hashmap存储出现的频率，得到最高的。
 第一个注意点： 用正则表达式Parse出单个的单词。
@@ -107,5 +107,5 @@ class Solution {
 
 
 ## 4. Count number of substrings with exactly K characters
-similar to leetcode 340 [340. Longest Substring with At Most K Distinct Characters](https://leetcode.com/problems/longest-substring-with-at-most-k-distinct-characters/)
+similar to [340. Longest Substring with At Most K Distinct Characters](https://leetcode.com/problems/longest-substring-with-at-most-k-distinct-characters/)
 and could refer to (https://www.geeksforgeeks.org/count-number-of-substrings-with-exactly-k-distinct-characters/)
