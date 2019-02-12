@@ -149,7 +149,7 @@ public class CountKSubstr{
 ```
 * Need to consider lower time complexity.
 
-## 4. MaximumMinimumPath
+## 4. MaximumMinimumPath (need knowing DP version)
 [174. Dungeon Game](https://leetcode.com/problems/dungeon-game/)
 
 You are gonna climb mountains represented by a matrix. Each integer in the matrix represent altitude at that point. You are supposed to climb from the top-left corner to the bottom-right corner and only move rightward or downward in each step.
@@ -229,7 +229,7 @@ public void dfsHelper(int[][] matrix, int min, int i, int j ){
 ```
 __There is a DP version for this question__
 
-## 5. Substree: Maximum average node
+## 5. Substree: Maximum average node (need verify)
 
 Given a binary tree, find the subtree with maximum average, return the root of the subtree.
 
@@ -297,7 +297,7 @@ BFS
 ```java
 public class Solution{
 	public int MinimumDistance(int[][] lot){
-		
+
 	}
 
 }
