@@ -180,7 +180,7 @@ public class MaximumMinimumPath{
 
 	}
 	public void DSF(int[][] mountain,int cur_min, int i, int j){
-		if(i == mountain.length && j == mountain[0].length){
+		if(i == mountain.length - 1 && j == mountain[0].length - 1){
 			cur_min = Math.min(mountain[i][j], cur_min);
 			max = Math.max(cur_min, max);
 			return;
@@ -204,26 +204,26 @@ public class MaximumMinimumPath{
 Another Version of DFS:
 ```java
 public class MaximumMinimumPath {
-private int min, max, row, col;
-public int maxMinPath(int[][] matrix) {
-row = matrix.length;
-col = matrix[0].length;
-min = Integer.MAX_VALUE;
-max = Integer.MIN_VALUE;
-dfsHelper(matrix, min, 0, 0);
-return max;
-}
+	private int min, max, row, col;
+	public int maxMinPath(int[][] matrix) {
+		row = matrix.length;
+		col = matrix[0].length;
+		min = Integer.MAX_VALUE;
+		max = Integer.MIN_VALUE;
+		dfsHelper(matrix, min, 0, 0);
+		return max;
+	}
 
 public void dfsHelper(int[][] matrix, int min, int i, int j ){
-if (i >= row || j >= col) return;
-if (i == row - 1 && j == col - 1) {
-min = Math.min(min, matrix[i][j]);
-max = Math.max(max, min);
-return;
-}
-min = Math.min(min, matrix[i][j]);
-dfsHelper(matrix, min, i, j + 1);
-dfsHelper(matrix, min, i + 1, j);
-}
+		if (i >= row || j >= col) return;
+		if (i == row - 1 && j == col - 1) {
+			min = Math.min(min, matrix[i][j]);
+			max = Math.max(max, min);
+			return;
+		}
+		min = Math.min(min, matrix[i][j]);
+		dfsHelper(matrix, min, i, j + 1);
+		dfsHelper(matrix, min, i + 1, j);
+	}
 }
 ```
