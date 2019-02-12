@@ -227,3 +227,10 @@ public void dfsHelper(int[][] matrix, int min, int i, int j ){
 	}
 }
 ```
+__There is a DP version__
+
+## 5. Substree: Maximum average node
+
+Given a binary tree, find the subtree with maximum average, return the root of the subtree.
+
+Variations: not binary tree or the average doesn't include the root of the subtree
