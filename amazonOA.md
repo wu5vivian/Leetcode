@@ -186,8 +186,8 @@ public class MaximumMinimumPath{
 			return;
 		}
 
-		dx = {0, 1};
-		dy = {-1, 0};
+		int[] dx = new int[]{0, 1};
+		int[]dy = new int[]{-1, 0};
 		cur_min = Math.min(mountain[i][j], cur_min);
 
 		for(int k = 0; k < 2; k++){
@@ -297,8 +297,52 @@ BFS
 ```java
 public class Solution{
 	public int MinimumDistance(int[][] lot){
+		if(lot[0][0] == 0){
+			return -1;
+		}
 
+		if(lot[0][0] == 9){
+			return 0;
+		}
+		int r = lot.length;
+		int c = lot[0].length;
+		int[][] visited = new int[r][c];
+
+		int[] dx = {0, 1, 0, -1};
+		int[] dy = {1, 0, -1, 0};
+		int level = 0;
+		Queue<Integer> q_x = new LinkedList<>();
+		Queue<Integer> q_y = new LinkedList<>();
+		q_x.offer(0);
+		q_y.offer(0);
+
+		while(!q_x.isEmpty()){
+			int size = q_x.size();
+			level++;
+
+			for(int i = 0; i < size; i++){
+				int cur_x = q_x.poll();
+				int cur_y = q_y.poll();
+
+				visited[cur_x][cur_y] = 1;
+
+				for(int k = 0; k < 4; k++){
+					int new_x = cur_x + dx[k];
+					int new_y = cur_y + dy[k];
+					if(new_x >= 0 && new_y >= 0 && new_x < r && new_y < c && lot[new_x][new_y] != 0 && visited[new_x][new_y] != 1){
+						if(lot[new_x][new_y] == 9){
+							return level;
+						}
+						q_x.offer(new_x);
+						q_y.offer(new_y);
+
+					}
+				}
+
+			}
+		}
+
+		return -1;
 	}
-
 }
 ```
