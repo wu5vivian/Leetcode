@@ -148,3 +148,21 @@ public class CountKSubstr{
 }
 ```
 * Need to consider lower time complexity.
+
+## 4. MaximumMinimumPath
+[174. Dungeon Game](https://leetcode.com/problems/dungeon-game/)
+
+You are gonna climb mountains represented by a matrix. Each integer in the matrix represent altitude at that point. You are supposed to climb from the top-left corner to the bottom-right corner and only move rightward or downward in each step.
+
+You can have many paths to do so. Each path has a minimum altitude. Find the maximum among all the minimum altitude of all paths.
+
+example:
+```txt
+[8, 4, 7]
+[6, 5, 9]
+3 paths：
+8-4-7-9 min: 4
+8-4-5-9 min: 4
+8-6-5-9 min: 5
+return: 5
+```
