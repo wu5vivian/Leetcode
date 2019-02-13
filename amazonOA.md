@@ -346,3 +346,130 @@ public class Solution{
 	}
 }
 ```
+
+## 7 K Nearest Points
+[973. K Closest Points to Origin](https://leetcode.com/problems/k-closest-points-to-origin/)
+
+First Version: Array Sorting
+```java
+class Solution {
+    public int[][] kClosest(int[][] points, int K) {
+        int N = points.length;
+        int[][] ans = new int[K][2];
+        int[] dist = new int[N];
+        for(int i = 0; i < N; i++){
+            dist[i] = dist(points[i]);
+        }
+        Arrays.sort(dist);
+        int distK = dist[K - 1];
+        int k = 0;
+        for(int i = 0; i < N; i++){
+            int d = dist(points[i]);
+            if(d <= distK){
+                ans[k++] = points[i];
+            }
+        }
+        return ans;
+        
+    }
+    public int dist(int[] point){
+        return point[0]*point[0] + point[1]*point[1];
+    }
+}
+```
+
+Second Version Using priority Queue
+1. Use max heap priority queue, first add all elements to the priority queue, then if the priority queue size larger than K, poll the element.
+2. Could also use min heap, first add all elements to minimum priority queue, and poll first K elements.
+```java
+// Max Heap
+class Solution {
+    public int[][] kClosest(int[][] points, int K) {
+        if(points == null || points.length <= K){
+            return points;
+        }
+        
+        int[][] result = new int[K][2];
+        PriorityQueue<int[]> q = new PriorityQueue<int[]>(K, new Comparator<int[]>(){
+            @Override
+            public int compare(int[] a, int[] b){
+                int dist_a = a[0] * a[0] + a[1] * a[1];
+                int dist_b = b[0] * b[0] + b[1] * b[1];
+                return dist_b - dist_a;
+            }
+        });
+        
+        for(int i= 0; i < points.length; i++){
+            q.offer(points[i]);
+            if(q.size() > K){
+                q.poll();
+            }
+        }
+        
+        for(int i = 0; i < K; i++){
+            result[i] = q.poll();
+        }
+        
+        return result;
+        
+    }
+}
+
+// Min heap:
+class Solution {
+    public int[][] kClosest(int[][] points, int K) {
+        if(points == null || points.length <= K){
+            return points;
+        }
+        
+        int[][] result = new int[K][2];
+        PriorityQueue<int[]> q = new PriorityQueue<int[]>(K, new Comparator<int[]>(){
+            @Override
+            public int compare(int[] a, int[] b){
+                int dist_a = a[0] * a[0] + a[1] * a[1];
+                int dist_b = b[0] * b[0] + b[1] * b[1];
+                return dist_a - dist_b;
+            }
+        });
+        
+        for(int i= 0; i < points.length; i++){
+            q.offer(points[i]);
+        }
+        
+        for(int i = 0; i < K; i++){
+            result[i] = q.poll();
+        }
+        
+        return result;
+        
+    }
+}
+
+```
+
+**Tips** 
+Write your own Comparator for priority queue.
+```Java
+PriorityQueue<Object> q = new PriorityQueue<Object>(int capacity, new Comparator<Object>(){
+	@Override
+	public int compare(Object o1, Object o1){
+		if(o1 < o2)
+			return 1;
+		else if(o1 == o2){
+			return 0;
+		}else
+			return -1;
+	}
+
+	});
+
+
+// Write Separate Comparator
+class myCmp implements Comparator<Object>{
+	public int compare(Object o1, Object o2){
+		return o1 - o2;
+	}
+}
+
+PriorityQueue<Object> q = new PriorityQueue<Object>(int capacity, new myCmp());
+```
