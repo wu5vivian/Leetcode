@@ -522,7 +522,7 @@ class Solution{
 			Arrays.sort(backwardDistance, new Mycmp());
 
 			int left = 0;
-			int right = backwardDistance.length;
+			int right = backwardDistance.length - 1;
 			int cur_max = Integer.MIN_VALUE;
 			int left_min = 0;
 			int right_min = 0;
