@@ -476,3 +476,91 @@ class myCmp implements Comparator<Object>{
 
 PriorityQueue<Object> q = new PriorityQueue<Object>(int capacity, new myCmp());
 ```
+
+## 8 Flight  (Unfinished)
+
+Amazon Prime Air is developing  a system that divides shipping routes using flight optimization routing systems to a cluster of aircraft that can fullfill these routes. Each shipping route is identified by a unique integer identifier, requires a fixed non-zero amount of travel distance between airports, and is defined to be either a forward shipping route or a return shipping route. Identifiers are guaranteed to be unique within their own route type, but not across route types.......
+题目太长不想打了。大概意思就是一个飞机有一个maximum operating distance， 要从去程和回程中找到一个最优的路径组合，似的这个路径组合最接近飞机的maximum operating distance，但是又不超过这个值。
+Similiar Question to __"Two cloest sum"__
+
+```java
+class Solution{
+	class Distance{
+		int id;
+		int distance;
+		Distance(int i, int d){
+			this.id = i;
+			this.distance = d;
+		}
+	}
+
+	class Mycmp implements Comparator<Distance>{
+		@Override
+		public int compare(Distance d1, Distance d2){
+			return d1.distance - d2.distance;
+		}
+	}
+
+	public List<List<Integer>> optmialPair(int maximumOD, List<List<Integer>> forward, List<List<Integer>> backward){
+			List<List<Integer>> result = new ArrayList<List<Integer>>();
+			if(forward == null || backward == null || forward.size() == 0 || backward.size() == 0){
+				return result;
+			}
+
+			Distance[] forwardDistance = new Distance[forward.size()];
+			Distance[] backwardDistance = new Distance[backward.size()];
+
+			for(int i = 0; i < forward.size(); i++){
+				forwardDistance[i] = new Distance(forward.get(i).get(0), forward.get(i).get(1));
+			}
+
+			for(int i = 0; i < backward.size(); i++){
+				backwardDistance[i] = new Distance(backward.get(i).get(0), backward.get(i).get(1));
+			}
+
+			Arrays.sort(forwardDistance, new Mycmp());
+			Arrays.sort(backwardDistance, new Mycmp());
+
+			int left = 0;
+			int right = backwardDistance.length;
+			int cur_max = Integer.MIN_VALUE;
+			int left_min = 0;
+			int right_min = 0;
+
+			while(left < forwardDistance.length && right >= 0){
+				if(forwardDistance[left].distance + backwardDistance[right].distance < maximumOD){
+					if(forwardDistance[left].distance + backwardDistance[right].distance > cur_max){
+						cur_max = forwardDistance[left].distance + backwardDistance[right].distance;
+						left_min = left;
+						right_min = right;
+					}
+					if(left < forwardDistance.length - 1)
+						left++;
+				}else if(forwardDistance[left].distance + backwardDistance[right].distance == maximumOD){
+					cur_max = maximumOD;
+					ArrayList<Integer> res = new ArrayList<Integer>();
+					res.add(forwardDistance[left].id);
+					res.add(backwardDistance[right].id);
+					result.add(res);
+					if(left < forwardDistance.length - 1)
+						left++;
+					if(right >= 0) right--;
+
+				}else{
+					right--;
+				}
+			}
+
+
+
+
+
+
+	}
+
+}
+```
+
+
+## 9 Maze II
+[505. The Maze II](https://leetcode.com/problems/the-maze-ii/)
