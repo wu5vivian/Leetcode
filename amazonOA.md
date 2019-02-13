@@ -448,6 +448,7 @@ class Solution {
 ```
 
 **Tips** 
+
 Write your own Comparator for priority queue.
 ```Java
 PriorityQueue<Object> q = new PriorityQueue<Object>(int capacity, new Comparator<Object>(){
@@ -463,7 +464,8 @@ PriorityQueue<Object> q = new PriorityQueue<Object>(int capacity, new Comparator
 
 	});
 
-
+```
+```java
 // Write Separate Comparator
 class myCmp implements Comparator<Object>{
 	public int compare(Object o1, Object o2){
