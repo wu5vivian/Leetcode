@@ -465,6 +465,7 @@ PriorityQueue<Object> q = new PriorityQueue<Object>(int capacity, new Comparator
 	});
 
 ```
+Write with separate comparator.
 ```java
 // Write Separate Comparator
 class myCmp implements Comparator<Object>{
