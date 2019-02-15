@@ -567,3 +567,43 @@ class Solution{
 
 ## 9 Maze II
 [505. The Maze II](https://leetcode.com/problems/the-maze-ii/)
+```java
+class Solution {
+    public int shortestDistance(int[][] maze, int[] start, int[] destination) {
+        int[][] distance = new int[maze.length][maze[0].length];
+        
+        for(int[] row : distance){
+            Arrays.fill(row, Integer.MAX_VALUE);
+        }
+        
+        distance[start[0]][start[1]] = 0;
+        DFS(maze, start[0], start[1], distance);
+        return distance[destination[0]][destination[1]] == Integer.MAX_VALUE? -1 : distance[destination[0]][destination[1]];
+        
+    }
+    
+    public void DFS(int[][] maze, int i, int j, int[][] distance){
+         int[] dx = {-1, 0, 1, 0};
+         int[] dy = {0, -1, 0, 1};
+        
+         for(int k = 0; k < 4; k++){
+             int count = 0;
+             int new_i = i + dx[k];
+             int new_j = j + dy[k];
+             
+             while(new_i >= 0 && new_i < maze.length && new_j >= 0 && new_j < maze[0].length && maze[new_i][new_j] == 0){
+                 count++;
+                 new_i += dx[k];
+                 new_j += dy[k];
+             }
+             
+             if(distance[i][j] + count < distance[new_i - dx[k]][new_j - dy[k]]){
+                 distance[new_i - dx[k]][new_j - dy[k]] = distance[i][j] + count;
+                 DFS(maze, new_i - dx[k], new_j - dy[k], distance);
+             }
+             
+         }
+        
+    }
+}
+```
