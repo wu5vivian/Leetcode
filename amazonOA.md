@@ -567,6 +567,11 @@ class Solution{
 
 ## 9 Maze II
 [505. The Maze II](https://leetcode.com/problems/the-maze-ii/)
+Improved DFS: 一个方向走到头再转向， 加一个while循环keep一个方向往前走。
+最短路线：持续保持更新，保证每个点的路径是最短的。
+
+
+
 ```java
 class Solution {
     public int shortestDistance(int[][] maze, int[] start, int[] destination) {
