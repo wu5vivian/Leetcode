@@ -612,3 +612,60 @@ class Solution {
     }
 }
 ```
+
+## 10 High Five
+```java
+class Record{
+	int id;
+	int score;
+	Record(int i, int s){
+		id = i;
+		score = s;
+	}
+}
+
+class My_cmp implements Comparator<Record>{
+	@Override
+	public int compare(Object o1, Object o2){
+		return o1.score - o2.score;
+	}
+}
+
+
+public Map<Integer, Double> highFive(Record[] records){
+	Map<Integer, Double> result = new HashMap<Integer,Double>();
+	if(results == null || results.length == 0){
+		return result;
+	}
+
+	Map<Integer, PriorityQueue<Record>> map = new HashMap<>();
+
+	for(Record r : records){
+		if(!map.containsKey(r.id)){
+			PriorityQueue<Record> pq = new PriorityQueue<Record>(10,new My_cmp());
+			map.put(r.id, pq);
+
+		}
+
+		map.get(r.id).offer(r.score);
+		if(map.get(r.id).size() > 5){
+			map.get(r.id).poll();
+		}
+	}
+
+	for(int Id : map.keySet()){
+		PriorityQueue<Record> getpq = map.get(Id);
+		double sum = 0;
+		int size = getpq.size();
+		while(!getpq.isEmpty()){
+			Record rd = getpq.poll();
+			sum += rd.score;
+		}
+		result.put(Id, sum / size);
+	}
+
+	return result;
+
+
+}
+```
