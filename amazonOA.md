@@ -1,3 +1,4 @@
+
 # Amazon OA
 
 **Pakages**
@@ -667,5 +668,107 @@ public Map<Integer, Double> highFive(Record[] records){
 	return result;
 
 
+}
+```
+
+## 11.MST
+```java
+import java.util.*;
+
+class Connection{
+	int node1;
+	int node2;
+	int cost;
+	public Connection(String a, String b, int c){
+		node1 = a;
+		node2 = b;
+		cost = c;
+	}
+
+public class CityConnection{
+	priviate static int numOfGroup;
+
+	public static ArrayList<Connection> getLowCost(ArrayList<Connection> connections){
+		if(connections == null)}{
+			return new ArrayList<Connection>();
+		}
+
+		ArrayList<Connection> result = new ArrayList<>();
+		Map<String, Integer> map = new HashMap<>();
+
+		Collections.sort(connections, new Comparator<Connection>(){
+			@Override
+			public int compare(Object o1, Object o2){
+				return o1.cost - o2.cost;
+			}
+			});
+		numOfGroup = 0;
+
+		for(Connection c : connections){
+			String a = c.node1;
+			String b = c.node2;
+
+			if(union(map, a, b)){
+				result.add(c);
+			}
+		}
+
+		String start = connections.get(0).node1;
+		int groupId = map.get(start);
+
+		for(int k : map.keySet()){
+			if(map.get(k) != groupId){
+				return new ArrayList<>();
+			}
+		}
+
+		Collections.sort(result, new Comparator<Connection>(){
+			@Override
+			public int compare(Object o1, Object o2){
+				if(o1.node1.equals(o2.node1)){
+					return o1.node2.compareTo(o2.node2);
+				}else{
+					return o1.node1.compareTo(o2.node1);
+				}
+			}
+			});
+
+		return result;
+
+	}
+
+	private staitc boolean int(Map<String, Integer> map, String a, String b){
+		if(!map.containsKey(a) && !map.containsKey(b)){
+			map.put(a, numOfGroup);
+			map.put(b, numOfGroup);
+			numOfGroup++;
+			return true;
+		}
+
+		if(map.containsKey(a) && !map.containsKey(b)){
+			int group_a = map.get(a);
+			map.put(b, group_a);
+			return true;
+		}
+
+		if(!map.containsKey(a) && map.containsKey(b)){
+			int group_b = map.get(b);
+			map.put(a, group_b);
+			return true;
+		}
+
+		int group_a = map.get(a);
+		int group_b = map.get(b);
+
+		if(group_a == group_b) return false;
+		for(String s : map.keySet()){
+			if(map.get(s) == group_b) map.put(s, group_a);
+		}
+
+		return true;
+
+	}
+
+}
 }
 ```
