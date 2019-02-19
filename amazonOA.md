@@ -772,3 +772,63 @@ public class CityConnection{
 }
 }
 ```
+
+## 12 Log File
+```java
+import java.util.*;
+
+class Mycmp implements<String>{
+	@Override
+	public int compare(Obejct o1, Object o2){
+		String a = (String)o1;
+		String b = (String)o2;
+		int index_a = a.indexOf(" ");
+		int index_b = b.indexOf(" ");
+		String head_a = a.substring(0, index_a);
+		String head_b = b.substring(0, index_b);
+		String body_a = a.subtring(index_a + 1);
+		String body_b = b.substring(index_b + 1);
+		if(body_a.equals(body)){
+			return head_a.compareTo(head_b);
+		}else{
+			return body_a.compareTo(body_b);
+		}
+
+	}
+
+
+}
+
+public String[] logSort(String[] logs){
+	String[] res = new String(logs.length);
+	ArrayList<String> alphastring = new ArrayList<>();
+	int count = logs.length - 1;
+	for(int i = count; i >= 0; i--){
+		int begin = logs[i].indexOf(" ");
+		String body = logs[i].substring(begin + 1);
+		if(Character.isDigit(body.charAt(0))){
+			res[count--] = logs[i];
+		}else{
+			alphastring.add(new String(logs[i]));
+		}
+	}
+
+	Collections.sort(alphastring, new Mycmp());
+
+	int cnt = 0;
+	for(String s : alphastring){
+		res[cnt++] = s;
+	}
+
+	return res;
+	
+
+}
+
+
+
+
+
+
+
+```
