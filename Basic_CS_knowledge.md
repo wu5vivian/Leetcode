@@ -193,3 +193,202 @@ public class HeapMin(){
 	}
 }
 ```
+
+# Rewrite Iterator
+```java
+// Java Iterator interface reference:
+// https://docs.oracle.com/javase/8/docs/api/java/util/Iterator.html
+class PeekingIterator implements Iterator<Integer> {
+    Integer next = null;
+    Iterator<Integer> iter;
+	public PeekingIterator(Iterator<Integer> iterator) {
+	    // initialize any member here.
+        iter = iterator;
+        if(iter.hasNext()){
+            next = iter.next();
+        }
+	    
+	}
+
+    // Returns the next element in the iteration without advancing the iterator.
+	public Integer peek() {
+        return next;
+	}
+
+	// hasNext() and next() should behave the same as in the Iterator interface.
+	// Override them if needed.
+	@Override
+	public Integer next() {
+        Integer res = next;
+	    next = iter.hasNext()? iter.next : null;
+        return res;
+	}
+
+	@Override
+	public boolean hasNext() {
+        if(iter.next() == null){
+            return false;
+        }else{
+            return true;
+        }
+	    
+	}
+}
+```
+
+# 3 SUM
+```java
+class Solution {
+    public List<List<Integer>> threeSum(int[] nums) {
+        List<List<Integer>> result = new ArrayList<>();
+        if(nums == null || nums.length == 0){
+            return result;
+        }
+        
+        Arrays.sort(nums);
+        for(int i = 0; i < nums.length - 2; i++){
+            if(i > 0 && nums[i] == nums[i - 1]){
+                continue;
+            }
+            int target = 0 - nums[i];
+            int left = i + 1;
+            int right = nums.length - 1;
+                while(left < right){
+                    if(nums[left] + nums[right] == target){
+                        ArrayList<Integer> res = new ArrayList<Integer>();
+                        res.add(nums[i]);
+                        res.add(nums[left]);
+                        res.add(nums[right]);
+                        result.add(res);
+                        while(left < right && nums[left] == nums[left + 1])
+                            left++;
+                        while(left < right && nums[right] == nums[right - 1])
+                            right--;
+                        left++;
+                        right--;
+                    }else if(nums[left] + nums[right] < target){
+                        left++;
+                    }else{
+                        right--;
+                    }            
+            }
+        }
+        return result;        
+    }
+}
+```
+
+# 322 Coin Change
+```java
+class Solution {
+    public int coinChange(int[] coins, int amount) {
+        if(amount == 0){
+            return 0;
+        }
+        int[] counts = new int[amount + 1];
+        Arrays.fill(counts, Integer.MAX_VALUE - 1);
+        for(int coin : coins){
+            if(amount >= coin){
+                counts[coin] = 1;
+            }
+        }
+        counts[0] = 1;
+        
+        for(int i = 1; i <= amount; i++){            
+            for(int coin : coins){
+                if(i >= coin){
+                    counts[i] = Math.min(counts[i - coin] + 1, counts[i]);
+                }
+            }
+        }
+        
+        return counts[amount] == Integer.MAX_VALUE - 1? -1 : counts[amount];
+        
+    }
+}
+```
+
+# 79 Word Search
+```java
+
+```
+
+# 110 Balanced Binary TREE
+```JAVA
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+class Solution {
+    public boolean isBalanced(TreeNode root) {
+            return height(root) != -1;
+        
+    }
+    
+    public int height(TreeNode root){
+        if(root == null){
+            return 0;
+        }
+        int left = height(root.left);
+        if(left == -1) return -1;
+        
+        int right = height(root.right);
+        if(right == -1) return -1;
+        
+        if(Math.abs(left - right) > 1){
+            return -1;
+        }
+        
+        return Math.max(left, right) + 1;
+        
+    }
+}
+```
+
+# 139 Word Break
+```java
+class Solution {
+    public boolean wordBreak(String s, List<String> wordDict) {
+        if(s == null || s.length() == 0 || wordDict == null || wordDict.size() == 0){
+            return false;
+        }
+        
+        HashSet<String> set = new HashSet<>();
+        for(String str : wordDict){
+            set.add(str);
+        }
+        HashMap<String, Boolean> memo = new HashMap<>();
+        
+        return helper(s, 0, set, memo);
+        
+        
+        
+    }
+    private boolean helper(String s, int start, HashSet<String> word, HashMap<String, Boolean> memo){
+        if(start == s.length()){
+            return true;
+        }
+        if(memo.containsKey(s.substring(start))){
+            return memo.get(s.substring(start));
+        }
+        
+        for(int i = start; i < s.length(); i++){
+            String substring = s.substring(start, i + 1);
+            if(word.contains(substring)){
+                if(helper(s, i + 1, word, memo)){
+                    memo.put(s.substring(i + 1), true);
+                    return true;
+                }
+            }
+            
+        }
+        memo.put(s.substring(start), false);
+        return false;
+    }
+}
+```
